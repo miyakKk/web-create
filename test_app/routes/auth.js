@@ -3,9 +3,10 @@ const bcrypt = require("bcrypt")
 
 const router = require("express").Router();
 
-// const hashFunc = (password) => {
-//   return bcrypt.hashSync(password, 10);
-// };
+//パスワードのハッシュ化
+const hashFunc = (password) => {
+  return hashPassword = bcrypt.hashSync(password, 10);
+};
 
 //新規登録登録
 router.post("/register", async (req, res) => {
@@ -13,6 +14,8 @@ router.post("/register", async (req, res) => {
   var email = req.body.user_email;
   var password = req.body.user_password;
   var confirmationPassword = req.body.user_confirmationPassword;
+
+  console.log(hashFunc(password));
 
   existEmail = await MySQLClient.executeQuery(
     `
@@ -39,7 +42,7 @@ router.post("/register", async (req, res) => {
       VALUES
         (?, ?, ?);
       `,
-      [name, email, password]
+      [name, email, hashFunc(password)]
     );
     console.log(results);
     return res.status(200).json("ユーザーを登録しました。");
@@ -49,18 +52,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-//ログイン
-router.post("login", async (req, res) => {
-  email = res.body.user_email
-  password = res.body.user_password
-
-  try{
-
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-
-})
 
 
 module.exports = router;
