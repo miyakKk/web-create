@@ -28,11 +28,10 @@ router.post("/register", async (req, res) => {
     `,
     [email]
   );
-  // console.log(existEmail.length);
 
   //認証
-  if (existEmail.length >= 1) return res.status(400).json("このEメールアドレスはすでに使われています。");
-  if (password !== confirmationPassword) return res.status(400).json("パスワードが一致しません。");
+  if (existEmail.length >= 1) return res.status(400).json("このEメールアドレスはすでに使われています");
+  if (password !== confirmationPassword) return res.status(400).json("パスワードが一致しません");
 
   try {
     const results = await MySQLClient.executeQuery(
@@ -45,14 +44,40 @@ router.post("/register", async (req, res) => {
       [name, email, hashFunc(password)]
     );
     console.log(results);
-    return res.status(200).json("ユーザーを登録しました。");
+    return res.status(200).json("ユーザーを登録しました");
     
   } catch (err) {
     next(err);
   }
 });
 
+//ログイン
+router.post("/login", async (req, res) => {
+  const password = req.body.user_password;
+  const email = req.body.user_email;
 
+  const user = await MySQLClient.executeQuery(
+    `
+    SELECT
+      *
+    FROM
+      user_info
+    WHERE
+      user_email = ?
+    `,
+    [email]
+  );
+
+  //認証
+  if (user.length === 0)
+    return res.status(400).json("Eメールアドレスかパスワードが違います");
+
+  if (!await bcrypt.compare(password, user[0].user_password))
+    return res.status(400).json("Eメールアドレスかパスワードが違います");
+  
+  return res.status(400).json("ログインに成功しました");
+  
+});
 
 module.exports = router;
 

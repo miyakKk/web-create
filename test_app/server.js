@@ -3,6 +3,7 @@ const app = express();
 const mysql = require("mysql2");
 const dataRouter = require("./routes/data");
 const authRouter = require("./routes/auth");
+const uploadRouter = require("./routes/upload");
 const dbConfig = require("./config/mysql_config");
 PORT = 8000;
 
@@ -26,6 +27,7 @@ con.connect((err) => {
 app.use(express.json());
 app.use("/api/data", dataRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/upload", uploadRouter);
 
 
 
