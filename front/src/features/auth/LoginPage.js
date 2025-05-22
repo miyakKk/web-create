@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 const LoginPage = () => {
+  console.log('LoginPage rendered');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -25,7 +26,7 @@ const LoginPage = () => {
     try {
       const result = await login(email, password);
       console.log('ログイン成功:', result);
-
+      
       // localStorage.setItem('token', result.token);
       // navigate('/dashboard');
     } catch (err) {
