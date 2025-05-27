@@ -12,6 +12,9 @@ const Sidebar = ()=>{
                 <ListItem button component={Link} to="/history">
                     <ListItemText primary="履歴"/>
                 </ListItem>
+                <ListItem button >
+                    <ListItemText primary="ユーザー登録"/>
+                </ListItem>
             </List>
         </Box>
     )

@@ -79,4 +79,4 @@ const HistoryPage = () => {
     </div>
   )
 }
-export default HistoryPage
+export default HistoryPage;

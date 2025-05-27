@@ -4,13 +4,15 @@ import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import HistoryPage from '../pages/HistoryPage';
 import Layout from '../components/Layout';
+import SearchPage from '../pages/SearchPage';
 const AppRoutes = () => (
   <Routes>
+    <Route path="/" element={<Home />} />
     {/* ログイン画面にはsidebarは表示させない */}
     <Route path="/login" element={<LoginPage />} />
     {/* 以下の画面にはsidebarを表示させる */}
     <Route element={<Layout />}>
-      <Route path="/" element={<Home />} />
+      
       <Route path="/history" element={<HistoryPage/>}/>
     </Route>
     {/* NotFoundでもsidebarを表示させない */}
