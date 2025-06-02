@@ -5,6 +5,7 @@ import NotFound from '../pages/NotFound';
 import HistoryPage from '../pages/HistoryPage';
 import Layout from '../components/Layout';
 import SearchPage from '../pages/SearchPage';
+import RegisterPage from '../pages/RegisterPage';
 const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<Home />} />
@@ -12,8 +13,8 @@ const AppRoutes = () => (
     <Route path="/login" element={<LoginPage />} />
     {/* 以下の画面にはsidebarを表示させる */}
     <Route element={<Layout />}>
-      
       <Route path="/history" element={<HistoryPage/>}/>
+      <Route path="/register" element={<RegisterPage/>}/>
     </Route>
     {/* NotFoundでもsidebarを表示させない */}
     <Route path="*" element={<NotFound />} />
